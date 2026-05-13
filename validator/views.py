@@ -55,7 +55,6 @@ def logout_view(request):
     return redirect('login')
 
 
-@csrf_exempt
 @require_http_methods(["POST"])
 def validate(request):
     if not request.user.is_authenticated:
