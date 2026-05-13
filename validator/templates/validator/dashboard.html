@@ -1,0 +1,33 @@
+{% extends 'validator/base.html' %}
+
+{% block title %}Dashboard - StartupScan{% endblock %}
+
+{% block content %}
+  <div class="card" style="width:100%;max-width:980px;margin-bottom:24px; padding:28px;">
+    <div style="display:flex;align-items:center;justify-content:space-between; flex-wrap:wrap; gap:16px;">
+      <div>
+        <h1 style="font-size:2rem;margin-bottom:6px;">Welcome back, {{ user.username }}</h1>
+        <p style="color:rgba(255,255,255,0.65); max-width:720px;">Your saved ideas and validation reports are listed below. Tap any card to reopen the report.</p>
+      </div>
+      <a class="btn" href="{% url 'index' %}" style="flex-shrink:0;">Analyze a new idea</a>
+    </div>
+  </div>
+
+  {% if ideas %}
+    <div class="dashboard-grid">
+      {% for idea in ideas %}
+        <a class="idea-card" href="{% url 'view_idea' idea.id %}">
+          <div class="idea-date">{{ idea.created_at|date:"M d, Y H:i" }}</div>
+          <div class="idea-title">{{ idea.idea_text|truncatechars:120 }}</div>
+          <div class="idea-verdict verdict-go">View report</div>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card" style="max-width:720px; text-align:center; padding:28px;">
+      <h2 style="margin-bottom:12px;">No saved ideas yet</h2>
+      <p style="color:rgba(255,255,255,0.65); margin-bottom:20px;">Submit your first startup idea to generate a report and save it in your dashboard.</p>
+      <a class="btn" href="{% url 'index' %}">Get started</a>
+    </div>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+﻿{% extends 'validator/base.html' %}
+{% load static %}
+
+{% block title %}Home - StartupScan{% endblock %}
+
+{% block content %}
+  <div class="badge">Powered by Groq AI - 100% Free</div>
+  <h1>Validate Your Startup Idea <span class="grad">in Seconds</span></h1>
+  <p class="sub">Full market analysis, SWOT, competitor research, financials & a Go/No-Go verdict - instantly free.</p>
+  {% if not user.is_authenticated %}
+    <p class="info-text">Login or sign up to save your ideas and access your report later from your dashboard.</p>
+  {% endif %}
+  <div class="card">
+    <div class="lbl">Your Startup Idea</div>
+    <textarea id="idea" placeholder="e.g. An AI platform that helps restaurants in India reduce food waste by predicting daily demand using sales history and local events..." rows="5"></textarea>
+    <div class="divider"></div>
+    <div class="err" id="err"></div>
+    <button class="btn" id="btn" onclick="validate()">Analyze My Idea - Free</button>
+  </div>
+  <div id="loading">
+    <div class="spin"></div>
+    <div class="ld-t" id="ld-t">Fetching market news...</div>
+  </div>
+  <div class="feats">
+    <div class="feat"><div class="fdot"></div>Groq Llama AI</div>
+    <div class="feat"><div class="fdot"></div>Live News Context</div>
+    <div class="feat"><div class="fdot"></div>Google Trends</div>
+    <div class="feat"><div class="fdot"></div>SWOT + Financials</div>
+    <div class="feat"><div class="fdot"></div>100% Free</div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'validator/js/index.js' %}"></script>
+{% endblock %}

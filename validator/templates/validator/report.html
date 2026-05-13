@@ -1,0 +1,24 @@
+﻿{% extends 'validator/base.html' %}
+{% load static %}
+
+{% block title %}Validation Report - StartupScan{% endblock %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'validator/css/report.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div id="no-data" style="display:none; padding:24px; background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:18px; width:100%; max-width:980px; margin-bottom:24px; text-align:center;">
+    <h2>No Report Found</h2>
+    <p style="color:rgba(255,255,255,0.65); margin:16px 0 22px;">Submit an idea first or use the dashboard to access a saved report.</p>
+    <a class="btn" href="/">Back to Home</a>
+  </div>
+  <div id="report-actions" style="display:none; width:100%; max-width:980px; text-align:right; margin-bottom:16px;">
+    <a class="btn" href="/dashboard/">View dashboard</a>
+  </div>
+  <div id="app"></div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'validator/js/report.js' %}"></script>
+{% endblock %}

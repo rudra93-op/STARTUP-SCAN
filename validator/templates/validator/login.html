@@ -1,0 +1,41 @@
+{% extends 'validator/base.html' %}
+
+{% block title %}Login - StartupScan{% endblock %}
+
+{% block content %}
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="form-head">
+        <p class="eyebrow">Welcome back</p>
+        <h1>Log in to StartupScope AI</h1>
+      </div>
+
+      <form method="post" action="{% url 'login' %}" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="err">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}
+            <div class="err">{{ form.username.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          {{ form.password }}
+          {% if form.password.errors %}
+            <div class="err">{{ form.password.errors }}</div>
+          {% endif %}
+        </div>
+
+        <button class="btn btn-block" type="submit">Login</button>
+      </form>
+
+      <p class="auth-footer">New here? <a href="{% url 'signup' %}">Create account</a></p>
+    </div>
+  </div>
+{% endblock %}

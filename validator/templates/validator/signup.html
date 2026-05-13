@@ -1,0 +1,49 @@
+{% extends 'validator/base.html' %}
+
+{% block title %}Sign Up - StartupScan{% endblock %}
+
+{% block content %}
+  <div class="auth-page">
+    <div class="auth-box">
+      <div class="form-head">
+        <p class="eyebrow">Create account</p>
+        <h1>Start your journey</h1>
+      </div>
+
+      <form method="post" action="{% url 'signup' %}" novalidate>
+        {% csrf_token %}
+        {% if form.non_field_errors %}
+          <div class="err">{{ form.non_field_errors }}</div>
+        {% endif %}
+
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          {{ form.username }}
+          {% if form.username.errors %}
+            <div class="err">{{ form.username.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          {{ form.password1 }}
+          {% if form.password1.errors %}
+            <div class="err">{{ form.password1.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          {{ form.password2 }}
+          {% if form.password2.errors %}
+            <div class="err">{{ form.password2.errors }}</div>
+          {% endif %}
+        </div>
+
+        <button class="btn btn-block" type="submit">Sign Up</button>
+      </form>
+
+      <p class="auth-footer">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+  </div>
+{% endblock %}
